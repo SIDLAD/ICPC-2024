@@ -1,22 +1,25 @@
 {
-	"Mint Class (Tanveer Bhaiya)": {
+	"Mint Class": {
 		"scope":"cpp",
 		"prefix": "mintcode",
 		"body": [
 			"",
 			"#define MINT_MACRO",
 			"",
-			"template<int MOD = M>",
+			"template<int _MOD = M>",
 			"struct Mint {",
+			"    static constexpr int MOD = _MOD;",
+			"    ",
 			"    int val;",
 			"    Mint(long long v = 0) { if (v < 0) v = v % MOD + MOD; if (v >= MOD) v %= MOD; val = v; }",
+			"    Mint& operator=(long long v) { if (v < 0) v = v % MOD + MOD; if (v >= MOD) v %= MOD; val = v; return *this; }",
 			"    static int mod_inv(int a, int m = MOD) {",
 			"        int g = m, r = a, x = 0, y = 1, q;",
 			"        while (r != 0) q = g / r, g %= r, swap(g, r), x -= q * y, swap(x, y);",
 			"        return x < 0 ? x + m : x;",
 			"    } ",
 			"    explicit operator int() const { return val; }",
-			"    explicit operator bool()const { return val; }",
+			"    explicit operator bool() const { return val; }",
 			"    Mint& operator+=(const Mint &o) { val += o.val; if (val >= MOD) val -= MOD; return *this; }",
 			"    Mint& operator-=(const Mint &o) { val -= o.val; if (val < 0) val += MOD; return *this; }",
 			"    static unsigned fast_mod(uint64_t x, unsigned m = MOD) {",
@@ -33,6 +36,14 @@
 			"    friend Mint operator-(const Mint &a, const Mint &b) { return Mint(a) -= b; }",
 			"    friend Mint operator*(const Mint &a, const Mint &b) { return Mint(a) *= b; }",
 			"    friend Mint operator/(const Mint &a, const Mint &b) { return Mint(a) /= b; }",
+			"    template<typename T>",
+			"    friend Mint operator+(const T& a, const Mint &b) { return Mint(a) += b; }",
+			"    template<typename T>",
+			"    friend Mint operator-(const T& a, const Mint &b) { return Mint(a) -= b; }",
+			"    template<typename T>",
+			"    friend Mint operator*(const T& a, const Mint &b) { return Mint(a) *= b; }",
+			"    template<typename T>",
+			"    friend Mint operator/(const T& a, const Mint &b) { return Mint(a) /= b; }",
 			"    Mint& operator++() { val=val==MOD-1?0:val+1; return *this; }",
 			"    Mint& operator--() { val=val==0?MOD-1:val-1; return *this; }",
 			"    Mint operator++(int32_t) { Mint before = *this; ++*this; return before; }",
@@ -48,12 +59,12 @@
 			"        return res;",
 			"    }",
 			"    friend ostream& operator << (ostream &stream, const Mint &m) { return stream << m.val; }",
-			"    friend istream& operator >> (istream &stream, Mint &m) { return stream>>m.val; } ",
+			"    friend istream& operator >> (istream &stream, Mint &m) { return stream >> m.val; } ",
 			"};",
 			"",
 			"using mint = Mint<>;",
 			"",
 		],
 		"description": ""
-	  }
+	}
 }
