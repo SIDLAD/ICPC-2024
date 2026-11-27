@@ -87,7 +87,7 @@
 			"    } ",
 			"    explicit operator int() const { return val; }",
 			"    explicit operator bool() const { return val; }",
-			"    // NOTE: val + o.val overflows int if MOD > 2^30 -- use long long (e.g. #define int long long above) for big runtime mods",
+			"    // NOTE: val + o.val overflows int if MOD > 2^30 (~1.07e9) -- use long long (e.g. #define int long long above) for big runtime mods",
 			"    Mint& operator+=(const Mint &o) { assert(MOD == o.MOD); val += o.val; if (val >= MOD) val -= MOD; return *this; }",
 			"    Mint& operator-=(const Mint &o) { assert(MOD == o.MOD); val -= o.val; if (val < 0) val += MOD; return *this; }",
 			"    static unsigned fast_mod(uint64_t x, unsigned m) {",
